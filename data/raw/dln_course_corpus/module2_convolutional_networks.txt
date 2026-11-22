@@ -1,0 +1,11 @@
+COURSE: Deep Learning Networks (M.Tech AI-ML)
+MODULE: 02 - Convolutional Neural Networks and Visual Architectures
+INSTRUCTOR: Department of Artificial Intelligence & Machine Learning
+SECTION: 2.1 Inductive Biases in Convolutions
+Convolutional Neural Networks (CNNs) enforce two foundational inductive biases: translation equivariance (f(T_x(I)) = T_x(f(I))) and local connectivity. By replacing dense matrix operations with sparse filter kernels W in R^{C_out x C_in x K x K}, CNNs drastically reduce parameter count from O(N^2) to O(K^2 * C), making them computationally tractable for high-dimensional images. Strided convolutions and pooling layers enforce spatial downsampling while expanding the effective receptive field: RF_l = RF_{l-1} + (K_l - 1) * prod_{i=1}^{l-1} s_i.
+
+SECTION: 2.2 Residual Learning and ResNet Architectures
+As neural networks exceed 20 layers, empirical degradation occurs: training error increases due to optimization difficulty rather than overfitting. He et al. (2016) introduced Residual Networks (ResNet) formulating the mapping as H(x) = F(x) + x, where F(x) = W_2 * sigma(W_1 * x). If an identity mapping is optimal, the optimizer easily drives residual weights F(x) -> 0. The shortcut connections create gradient highways where dL/dx = dL/dH * (dF/dx + I), ensuring the gradient retains an additive identity component that prevents vanishing gradients across hundreds of layers.
+
+SECTION: 2.3 Modern Vision Backbones: From ConvNeXt to Vision Transformers
+ConvNeXt (Liu et al., 2022) modernized CNNs using 7x7 depthwise convolutions, inverted bottlenecks, and layer normalization, matching Vision Transformer (ViT) performance while preserving convolutional inductive biases. In contrast, Vision Transformers (Dosovitskiy et al., 2020) partition images into 16x16 non-overlapping patches, project them linearly into patch embeddings, prepend a learnable [CLS] token, and process them via standard Transformer encoders without translational inductive biases.

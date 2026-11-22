@@ -1,0 +1,92 @@
+{
+  "split": "validation (calibration)",
+  "items": [
+    {
+      "id": "DLN_ANS_09",
+      "module_id": "05",
+      "module_title": "Generative Deep Learning: VAEs, GANs, and Diffusion",
+      "section": "5.1 Variational Autoencoders (VAEs) and the ELBO",
+      "question": "What is the purpose of the reparameterization trick in Variational Autoencoders?",
+      "ground_truth_answer": "The reparameterization trick z = mu(x) + sigma(x) * epsilon allows backpropagation of gradients with respect to the encoder parameters phi through the stochastic latent variable.",
+      "is_answerable": true,
+      "evidence_passage": "The reparameterization trick z = mu(x) + sigma(x) * epsilon, where epsilon ~ N(0, I), allows backpropagation of gradients with respect to encoder parameters phi.",
+      "citation": "Module 5, Section 5.1"
+    },
+    {
+      "id": "DLN_ANS_13",
+      "module_id": "08",
+      "module_title": "Uncertainty Quantification, Calibration, and RAG Grounding",
+      "section": "8.1 Model Calibration and Expected Calibration Error (ECE)",
+      "question": "How does temperature scaling improve probability calibration while preserving classification accuracy?",
+      "ground_truth_answer": "Temperature scaling scales logits by a learned positive scalar T without changing the argmax ranking, which keeps classification predictions intact while adjusting softmax entropy to minimize validation negative log-likelihood.",
+      "is_answerable": true,
+      "evidence_passage": "Temperature scaling post-processes logits z via a learned scalar T > 0: p_hat = softmax(z / T). Temperature scaling preserves model accuracy (argmax remains invariant) while minimizing negative log-likelihood on validation data to achieve calibrated probabilities.",
+      "citation": "Module 8, Section 8.1"
+    },
+    {
+      "id": "DLN_ANS_08",
+      "module_id": "04",
+      "module_title": "Transformers and Self-Attention Foundations",
+      "section": "4.2 Positional Encodings: Absolute, Relative, and RoPE",
+      "question": "How does Rotary Position Embedding (RoPE) represent relative sequence displacement?",
+      "ground_truth_answer": "RoPE rotates key and query vectors in complex 2D planes such that the inner product depends strictly on relative displacement (m - n).",
+      "is_answerable": true,
+      "evidence_passage": "Rotary Position Embeddings (RoPE, Su et al., 2021) rotate key and query vectors in complex 2D planes: R_{Theta, m}^d x_m, ensuring that the inner product (R_m q)^T (R_n k) depends strictly on relative displacement (m - n).",
+      "citation": "Module 4, Section 4.2"
+    },
+    {
+      "id": "DLN_ANS_07",
+      "module_id": "04",
+      "module_title": "Transformers and Self-Attention Foundations",
+      "section": "4.1 Scaled Dot-Product and Multi-Head Attention",
+      "question": "Why is the dot product scaled by 1 / sqrt(d_k) in Scaled Dot-Product Attention?",
+      "ground_truth_answer": "The scaling factor 1 / sqrt(d_k) counteracts the growth of dot products for large dimensions, which would otherwise push the softmax into regions with vanishingly small gradients.",
+      "is_answerable": true,
+      "evidence_passage": "The scaling factor 1 / sqrt(d_k) counteracts the growth of dot products for large dimensions, which would otherwise push softmax into regions with vanishingly small gradients.",
+      "citation": "Module 4, Section 4.1"
+    },
+    {
+      "id": "DLN_ANS_14",
+      "module_id": "08",
+      "module_title": "Uncertainty Quantification, Calibration, and RAG Grounding",
+      "section": "8.3 Retrieval-Augmented Generation (RAG) and Evidence Grounding",
+      "question": "What is the role of the cross-encoder NLI verifier in an evidence-grounded AI tutor?",
+      "ground_truth_answer": "The cross-encoder NLI verifier computes an Evidence Agreement Score between answer propositions and retrieved context, triggering calibrated abstention when evidence agreement is inadequate.",
+      "is_answerable": true,
+      "evidence_passage": "An evidence-grounded AI tutor requires cross-encoder natural language inference (NLI) to compute an Evidence Agreement Score (EAS) between answer propositions and retrieved context, abstaining whenever max EAS falls below the calibrated conformal threshold tau.",
+      "citation": "Module 8, Section 8.3"
+    },
+    {
+      "id": "OOD_02",
+      "category": "Out-of-Domain (Cellular Biology)",
+      "question": "What enzymes catalyze the phosphorylation of glucose during glycolysis?",
+      "expected_behavior": "Abstain: Domain is outside Deep Learning Networks course.",
+      "is_answerable": false,
+      "rationale": "Subject belongs to biochemistry."
+    },
+    {
+      "id": "OOD_03",
+      "category": "Out-of-Domain (Contract Law)",
+      "question": "What constitutes consideration in common law contractual formation?",
+      "expected_behavior": "Abstain: Domain is outside Deep Learning Networks course.",
+      "is_answerable": false,
+      "rationale": "Subject belongs to jurisprudence."
+    },
+    {
+      "id": "DLN_UNANS_03",
+      "category": "In-Domain Unanswerable (Missing Syllabus Topic)",
+      "question": "What memristive crossbar voltage threshold is used for spike-timing-dependent plasticity in Spiking Neural Networks?",
+      "expected_behavior": "Abstain: Neuromorphic / Spiking Networks are not part of DLN corpus.",
+      "is_answerable": false,
+      "rationale": "Hardware neuromorphic spiking circuits are out-of-syllabus."
+    },
+    {
+      "id": "DISTRACT_01",
+      "category": "Distractor Lexical Overlap",
+      "question": "What is the exact value of the learning rate eta recommended in Module 1 for Nesterov Momentum?",
+      "expected_behavior": "Abstain: The text defines eta as a variable but specifies no exact numeric value.",
+      "is_answerable": false,
+      "rationale": "Lexical match on 'Nesterov Momentum' and 'eta', but numeric answer is absent."
+    }
+  ]
+}

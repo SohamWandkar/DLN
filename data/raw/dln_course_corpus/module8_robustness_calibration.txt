@@ -1,0 +1,11 @@
+COURSE: Deep Learning Networks (M.Tech AI-ML)
+MODULE: 08 - Uncertainty Quantification, Calibration, and RAG Grounding
+INSTRUCTOR: Department of Artificial Intelligence & Machine Learning
+SECTION: 8.1 Model Calibration and Expected Calibration Error (ECE)
+Modern deep neural networks are frequently miscalibrated—they output overconfident probabilities that exceed empirical accuracy. Calibration is evaluated using Expected Calibration Error (ECE): ECE = sum_{m=1}^M (|B_m| / N) * |acc(B_m) - conf(B_m)|, where predictions are binned into M confidence intervals. Temperature scaling post-processes logits z via a learned scalar T > 0: p_hat = softmax(z / T). Temperature scaling preserves model accuracy (argmax remains invariant) while minimizing negative log-likelihood on validation data to achieve calibrated probabilities.
+
+SECTION: 8.2 Out-of-Distribution (OOD) Detection and Calibrated Abstention
+When presented with queries outside the training distribution, reliable AI tutors must abstain rather than hallucinating unsupported claims. Maximum Softmax Probability (MSP, Hendrycks & Gimpel, 2017) serves as an initial baseline, but exhibits overconfidence on far-OOD inputs. Energy-based OOD scoring E(x; f) = - T * log sum_i exp(f_i(x) / T) provides mathematically grounded density alignment. Conformal prediction provides distribution-free finite-sample guarantees: finding a calibrated threshold tau such that P(Error <= alpha) >= 1 - delta.
+
+SECTION: 8.3 Retrieval-Augmented Generation (RAG) and Evidence Grounding
+Standard RAG retrieves candidate context passages D = {d_1, ..., d_k} and conditions generation on (q, D). However, naive RAG systems suffer from two critical failure modes: (1) sycophantic hallucination, where the model incorporates retrieved distractor noise or defaults to parametric hallucinations when passages are irrelevant; and (2) citation fabrication, where generated answers cite source passages that do not semantically entail the claim. An evidence-grounded AI tutor requires cross-encoder natural language inference (NLI) to compute an Evidence Agreement Score (EAS) between answer propositions and retrieved context, abstaining whenever max EAS falls below the calibrated conformal threshold tau.

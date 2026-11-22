@@ -1,0 +1,11 @@
+COURSE: Deep Learning Networks (M.Tech AI-ML)
+MODULE: 04 - Transformers and Self-Attention Foundations
+INSTRUCTOR: Department of Artificial Intelligence & Machine Learning
+SECTION: 4.1 Scaled Dot-Product and Multi-Head Attention
+Vaswani et al. (2017) formalized Scaled Dot-Product Attention: Attention(Q, K, V) = softmax( (Q K^T) / sqrt(d_k) ) V. The scaling factor 1 / sqrt(d_k) counteracts the growth of dot products for large dimensions, which would otherwise push softmax into regions with vanishingly small gradients. Multi-Head Attention projects Q, K, V into h distinct representation subspaces: MultiHead(Q,K,V) = Concat(head_1, ..., head_h) W^O, where head_i = Attention(Q W_i^Q, K W_i^K, V W_i^V).
+
+SECTION: 4.2 Positional Encodings: Absolute, Relative, and RoPE
+Because self-attention is permutation-equivariant, positional information must be injected explicitly. Sinusoidal encodings use fixed frequencies: PE_{(pos, 2i)} = sin(pos / 10000^{2i/d}). Rotary Position Embeddings (RoPE, Su et al., 2021) rotate key and query vectors in complex 2D planes: R_{Theta, m}^d x_m, ensuring that the inner product (R_m q)^T (R_n k) depends strictly on relative displacement (m - n), enabling superior length extrapolation in modern LLMs like LLaMA and Mistral.
+
+SECTION: 4.3 Computational Complexity and Efficient Transformers
+Standard self-attention computes an N x N attention matrix, resulting in O(N^2 * d) time and memory complexity with respect to sequence length N. FlashAttention (Dao et al., 2022) reorganizes the attention computation using GPU SRAM tiling and online softmax scaling, reducing memory IO from O(N^2) HBM accesses to O(N) without altering the exact mathematical result.

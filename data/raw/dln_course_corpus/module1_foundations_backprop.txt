@@ -1,0 +1,11 @@
+COURSE: Deep Learning Networks (M.Tech AI-ML)
+MODULE: 01 - Foundations, Optimization, and Backpropagation
+INSTRUCTOR: Department of Artificial Intelligence & Machine Learning
+SECTION: 1.1 Computation Graphs and Automatic Differentiation
+Deep learning models are parameterized functions represented as directed acyclic computation graphs (DAGs). Reverse-mode automatic differentiation (backpropagation) computes the gradient of an objective scalar loss L with respect to all parameters Theta in time linear in the size of the forward graph. For any node v with children w in Children(v), the chain rule gives: dL/dv = sum_{w in Children(v)} (dL/dw * dw/dv). In modern frameworks like PyTorch, tensors maintain a grad_fn pointer to reconstruct the backward computational graph dynamically.
+
+SECTION: 1.2 Gradient Descent Variants and Momentum Dynamics
+Stochastic Gradient Descent (SGD) estimates the true gradient from mini-batches of size B. Classical Momentum accelerates learning along directions of low curvature by maintaining an exponentially decaying velocity vector v_t = gamma * v_{t-1} + eta * grad L(theta_t). Nesterov Accelerated Gradient (NAG) computes the gradient at a lookahead position theta_t - gamma * v_{t-1}, providing a corrective damping mechanism that suppresses oscillations. Adaptive optimizers like Adam combine momentum with per-parameter second-moment scaling: m_t = beta1 * m_{t-1} + (1 - beta1) * g_t, and v_t = beta2 * v_{t-1} + (1 - beta2) * g_t^2, with bias-correction factors (1 - beta1^t) and (1 - beta2^t).
+
+SECTION: 1.3 Vanishing and Exploding Gradients
+In deep feed-forward networks, propagating gradients through L layers involves repeated matrix multiplications: grad_{h_0} = grad_{h_L} * prod_{l=1}^L W_l * diag(sigma'(z_l)). If the singular values of the weight matrices W_l or the derivatives of activation functions sigma' are strictly less than 1 (as occurs in saturated Sigmoid or Tanh regimes where max sigma' <= 0.25), gradients decay exponentially to zero, preventing early layers from updating. Conversely, spectral radii greater than 1 induce gradient explosions, mitigated via gradient clipping ||g||_clipped = min(1, c / ||g||) * g and careful weight initialization (Xavier/He initialization).

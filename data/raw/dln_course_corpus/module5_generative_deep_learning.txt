@@ -1,0 +1,11 @@
+COURSE: Deep Learning Networks (M.Tech AI-ML)
+MODULE: 05 - Generative Deep Learning: VAEs, GANs, and Diffusion
+INSTRUCTOR: Department of Artificial Intelligence & Machine Learning
+SECTION: 5.1 Variational Autoencoders (VAEs) and the ELBO
+Variational Autoencoders model data distribution p(x) through continuous latent variables z ~ N(0, I). Because true posterior p(z|x) is intractable, VAEs optimize the Evidence Lower Bound (ELBO): log p(x) >= E_{q_phi(z|x)}[log p_theta(x|z)] - D_KL(q_phi(z|x) || p(z)). The first term is the reconstruction log-likelihood; the second term regularizes variational posterior q_phi(z|x) toward prior p(z). The reparameterization trick z = mu(x) + sigma(x) * epsilon, where epsilon ~ N(0, I), allows backpropagation of gradients with respect to encoder parameters phi.
+
+SECTION: 5.2 Generative Adversarial Networks (GANs) and Minimax Dynamics
+Goodfellow et al. (2014) formulated generative modeling as a zero-sum two-player game: min_G max_D V(D, G) = E_{x~p_data}[log D(x)] + E_{z~p_z}[log(1 - D(G(z)))]. Non-saturating GAN training maximizes E[log D(G(z))] for generator updates. Wasserstein GAN (WGAN, Arjovsky et al., 2017) optimizes the Earth Mover's Distance using the Kantorovich-Rubinstein duality under 1-Lipschitz constraints, enforcing Lipschitz continuity via gradient penalty (WGAN-GP): L = E[D(x~)] - E[D(x)] + lambda * E[(||grad_{x_hat} D(x_hat)||_2 - 1)^2].
+
+SECTION: 5.3 Denoising Diffusion Probabilistic Models (DDPM)
+DDPMs (Sohl-Dickstein et al., Ho et al., 2020) define a forward Markov chain that incrementally adds Gaussian noise over T steps: q(x_t | x_{t-1}) = N(x_t; sqrt(1 - beta_t) x_{t-1}, beta_t I). The reverse generative process p_theta(x_{t-1} | x_t) is parameterized by a neural network epsilon_theta(x_t, t) predicting the injected noise via the simplified objective: L_simple = E_{t, x_0, epsilon}[ ||epsilon - epsilon_theta(sqrt(alpha_bar_t) x_0 + sqrt(1 - alpha_bar_t) epsilon, t)||^2 ].

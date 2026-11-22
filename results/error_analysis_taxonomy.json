@@ -1,0 +1,20 @@
+{
+  "Type 1: True Positive Abstention (Graceful Refusal)": {
+    "count": 7,
+    "description": "Correctly detected insufficient evidence, missing syllabus topic, or false premise and refused to hallucinate.",
+    "example_query": "How does Batch Normalization eliminate the need for backpropagation?",
+    "mitigation_action": "Calibrated threshold triggered pedagogical refusal."
+  },
+  "Type 2: False Negative (Residual Sycophantic Hallucination)": {
+    "count": 0,
+    "description": "Adversarial distractor context exhibiting extreme lexical overlap which slipped past NLI boundary.",
+    "example_query": "What is the exact value of learning rate eta recommended in Module 1?",
+    "mitigation_action": "Add strict numeric constraint extraction in evidence proposition parser."
+  },
+  "Type 3: False Positive (Over-Abstention on Valid Query)": {
+    "count": 2,
+    "description": "Answerable question where complex phrasing reduced surface agreement below tau*.",
+    "example_query": "Why does saturated Sigmoid cause vanishing gradients in deep networks?",
+    "mitigation_action": "Tune temperature scaling and multi-hop query re-writing."
+  }
+}

@@ -1,0 +1,16 @@
+COURSE: Deep Learning Networks (M.Tech AI-ML)
+MODULE: 03 - Recurrent Neural Networks, LSTMs, and Attention
+INSTRUCTOR: Department of Artificial Intelligence & Machine Learning
+SECTION: 3.1 Recurrent State Dynamics and BPTT
+Recurrent Neural Networks (RNNs) process sequential inputs x_1, ..., x_T using a recurrent hidden state: h_t = tanh(W_{hh} h_{t-1} + W_{xh} x_t + b_h). Backpropagation Through Time (BPTT) unrolls the network over T steps. The Jacobian dh_t / dh_k = prod_{j=k+1}^t dh_j / dh_{j-1} involves repeated powers of W_{hh}^T. If the largest eigenvalue of W_{hh} is less than 1, gradients vanish over long temporal horizons, rendering standard RNNs incapable of capturing dependencies exceeding 10-15 time steps.
+
+SECTION: 3.2 Long Short-Term Memory (LSTM) and GRU
+LSTMs (Hochreiter & Schmidhuber, 1997) alleviate vanishing gradients through an internal cell state C_t and three multiplicative gating mechanisms:
+1. Forget gate: f_t = sigma(W_f [h_{t-1}, x_t] + b_f) governs information retention from C_{t-1}.
+2. Input gate: i_t = sigma(W_i [h_{t-1}, x_t] + b_i) and candidate cell state C~_t = tanh(W_c [h_{t-1}, x_t] + b_c).
+3. Cell state update: C_t = f_t * C_{t-1} + i_t * C~_t (linear additive gradient highway).
+4. Output gate: o_t = sigma(W_o [h_{t-1}, x_t] + b_o), yielding hidden state h_t = o_t * tanh(C_t).
+Gated Recurrent Units (GRU) combine forget and input gates into a single update gate z_t, merging the cell state and hidden state to reduce computational overhead.
+
+SECTION: 3.3 Additive vs Multiplicative Sequence Attention
+Bahdanau et al. (2015) introduced additive attention where alignment scores e_{ij} = v_a^T tanh(W_a s_{i-1} + U_a h_j) dynamically weigh encoder states h_j. Luong et al. (2015) proposed multiplicative (dot-product) attention: score(s_t, h_i) = s_t^T W_a h_i. Attention eliminates the sequential bottleneck by providing direct O(1) paths between arbitrary sequence positions.

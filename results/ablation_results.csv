@@ -1,0 +1,5 @@
+Configuration,AUROC,ECE,Hallucination Rate,Decision Accuracy
+LearnMate (Full System),0.9683,0.4349,0.0,0.8125
+w/o NLI Evidence Verifier,0.9206,0.3881,0.1429,0.875
+w/o Conformal Calibration,0.9683,0.4349,0.0,0.8125
+w/o BM25 Hybrid (Dense Only),0.9206,0.4473,0.1429,0.9375

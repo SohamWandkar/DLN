@@ -1,0 +1,245 @@
+{
+  "total_chunks": 30,
+  "chunks": [
+    {
+      "chunk_id": "CHUNK_0001",
+      "source_file": "module1_foundations_backprop.txt",
+      "module": "01 - Foundations, Optimization, and Backpropagation",
+      "section": "General Overview",
+      "text": "COURSE: Deep Learning Networks (M.Tech AI-ML) MODULE: 01 - Foundations, Optimization, and Backpropagation INSTRUCTOR: Department of Artificial Intelligence & Machine Learning",
+      "citation": "01 - Foundations, Optimization, and Backpropagation | General Overview"
+    },
+    {
+      "chunk_id": "CHUNK_0002",
+      "source_file": "module1_foundations_backprop.txt",
+      "module": "01 - Foundations, Optimization, and Backpropagation",
+      "section": "1.1 Computation Graphs and Automatic Differentiation",
+      "text": "Deep learning models are parameterized functions represented as directed acyclic computation graphs (DAGs). Reverse-mode automatic differentiation (backpropagation) computes the gradient of an objective scalar loss L with respect to all parameters Theta in time linear in the size of the forward graph. For any node v with children w in Children(v), the chain rule gives: dL/dv = sum_{w in Children(v)} (dL/dw * dw/dv). In modern frameworks like PyTorch, tensors maintain a grad_fn pointer to reconstruct the backward computational graph dynamically.",
+      "citation": "01 - Foundations, Optimization, and Backpropagation | 1.1 Computation Graphs and Automatic Differentiation"
+    },
+    {
+      "chunk_id": "CHUNK_0003",
+      "source_file": "module1_foundations_backprop.txt",
+      "module": "01 - Foundations, Optimization, and Backpropagation",
+      "section": "1.2 Gradient Descent Variants and Momentum Dynamics",
+      "text": "Stochastic Gradient Descent (SGD) estimates the true gradient from mini-batches of size B. Classical Momentum accelerates learning along directions of low curvature by maintaining an exponentially decaying velocity vector v_t = gamma * v_{t-1} + eta * grad L(theta_t). Nesterov Accelerated Gradient (NAG) computes the gradient at a lookahead position theta_t - gamma * v_{t-1}, providing a corrective damping mechanism that suppresses oscillations. Adaptive optimizers like Adam combine momentum with per-parameter second-moment scaling: m_t = beta1 * m_{t-1} + (1 - beta1) * g_t, and v_t = beta2 * v_{t-1} + (1 - beta2) * g_t^2, with bias-correction factors (1 - beta1^t) and (1 - beta2^t).",
+      "citation": "01 - Foundations, Optimization, and Backpropagation | 1.2 Gradient Descent Variants and Momentum Dynamics"
+    },
+    {
+      "chunk_id": "CHUNK_0004",
+      "source_file": "module1_foundations_backprop.txt",
+      "module": "01 - Foundations, Optimization, and Backpropagation",
+      "section": "1.3 Vanishing and Exploding Gradients",
+      "text": "In deep feed-forward networks, propagating gradients through L layers involves repeated matrix multiplications: grad_{h_0} = grad_{h_L} * prod_{l=1}^L W_l * diag(sigma'(z_l)). If the singular values of the weight matrices W_l or the derivatives of activation functions sigma' are strictly less than 1 (as occurs in saturated Sigmoid or Tanh regimes where max sigma' <= 0.25), gradients decay exponentially to zero, preventing early layers from updating. Conversely, spectral radii greater than 1 induce gradient explosions, mitigated via gradient clipping ||g||_clipped = min(1, c / ||g||) * g and careful weight initialization (Xavier/He initialization).",
+      "citation": "01 - Foundations, Optimization, and Backpropagation | 1.3 Vanishing and Exploding Gradients"
+    },
+    {
+      "chunk_id": "CHUNK_0005",
+      "source_file": "module2_convolutional_networks.txt",
+      "module": "02 - Convolutional Neural Networks and Visual Architectures",
+      "section": "General Overview",
+      "text": "COURSE: Deep Learning Networks (M.Tech AI-ML) MODULE: 02 - Convolutional Neural Networks and Visual Architectures INSTRUCTOR: Department of Artificial Intelligence & Machine Learning",
+      "citation": "02 - Convolutional Neural Networks and Visual Architectures | General Overview"
+    },
+    {
+      "chunk_id": "CHUNK_0006",
+      "source_file": "module2_convolutional_networks.txt",
+      "module": "02 - Convolutional Neural Networks and Visual Architectures",
+      "section": "2.1 Inductive Biases in Convolutions",
+      "text": "Convolutional Neural Networks (CNNs) enforce two foundational inductive biases: translation equivariance (f(T_x(I)) = T_x(f(I))) and local connectivity. By replacing dense matrix operations with sparse filter kernels W in R^{C_out x C_in x K x K}, CNNs drastically reduce parameter count from O(N^2) to O(K^2 * C), making them computationally tractable for high-dimensional images. Strided convolutions and pooling layers enforce spatial downsampling while expanding the effective receptive field: RF_l = RF_{l-1} + (K_l - 1) * prod_{i=1}^{l-1} s_i.",
+      "citation": "02 - Convolutional Neural Networks and Visual Architectures | 2.1 Inductive Biases in Convolutions"
+    },
+    {
+      "chunk_id": "CHUNK_0007",
+      "source_file": "module2_convolutional_networks.txt",
+      "module": "02 - Convolutional Neural Networks and Visual Architectures",
+      "section": "2.2 Residual Learning and ResNet Architectures",
+      "text": "As neural networks exceed 20 layers, empirical degradation occurs: training error increases due to optimization difficulty rather than overfitting. He et al. (2016) introduced Residual Networks (ResNet) formulating the mapping as H(x) = F(x) + x, where F(x) = W_2 * sigma(W_1 * x). If an identity mapping is optimal, the optimizer easily drives residual weights F(x) -> 0. The shortcut connections create gradient highways where dL/dx = dL/dH * (dF/dx + I), ensuring the gradient retains an additive identity component that prevents vanishing gradients across hundreds of layers.",
+      "citation": "02 - Convolutional Neural Networks and Visual Architectures | 2.2 Residual Learning and ResNet Architectures"
+    },
+    {
+      "chunk_id": "CHUNK_0008",
+      "source_file": "module2_convolutional_networks.txt",
+      "module": "02 - Convolutional Neural Networks and Visual Architectures",
+      "section": "2.3 Modern Vision Backbones: From ConvNeXt to Vision Transformers",
+      "text": "ConvNeXt (Liu et al., 2022) modernized CNNs using 7x7 depthwise convolutions, inverted bottlenecks, and layer normalization, matching Vision Transformer (ViT) performance while preserving convolutional inductive biases. In contrast, Vision Transformers (Dosovitskiy et al., 2020) partition images into 16x16 non-overlapping patches, project them linearly into patch embeddings, prepend a learnable [CLS] token, and process them via standard Transformer encoders without translational inductive biases.",
+      "citation": "02 - Convolutional Neural Networks and Visual Architectures | 2.3 Modern Vision Backbones: From ConvNeXt to Vision Transformers"
+    },
+    {
+      "chunk_id": "CHUNK_0009",
+      "source_file": "module3_recurrent_networks_attention.txt",
+      "module": "03 - Recurrent Neural Networks, LSTMs, and Attention",
+      "section": "General Overview",
+      "text": "COURSE: Deep Learning Networks (M.Tech AI-ML) MODULE: 03 - Recurrent Neural Networks, LSTMs, and Attention INSTRUCTOR: Department of Artificial Intelligence & Machine Learning",
+      "citation": "03 - Recurrent Neural Networks, LSTMs, and Attention | General Overview"
+    },
+    {
+      "chunk_id": "CHUNK_0010",
+      "source_file": "module3_recurrent_networks_attention.txt",
+      "module": "03 - Recurrent Neural Networks, LSTMs, and Attention",
+      "section": "3.1 Recurrent State Dynamics and BPTT",
+      "text": "Recurrent Neural Networks (RNNs) process sequential inputs x_1, ..., x_T using a recurrent hidden state: h_t = tanh(W_{hh} h_{t-1} + W_{xh} x_t + b_h). Backpropagation Through Time (BPTT) unrolls the network over T steps. The Jacobian dh_t / dh_k = prod_{j=k+1}^t dh_j / dh_{j-1} involves repeated powers of W_{hh}^T. If the largest eigenvalue of W_{hh} is less than 1, gradients vanish over long temporal horizons, rendering standard RNNs incapable of capturing dependencies exceeding 10-15 time steps.",
+      "citation": "03 - Recurrent Neural Networks, LSTMs, and Attention | 3.1 Recurrent State Dynamics and BPTT"
+    },
+    {
+      "chunk_id": "CHUNK_0011",
+      "source_file": "module3_recurrent_networks_attention.txt",
+      "module": "03 - Recurrent Neural Networks, LSTMs, and Attention",
+      "section": "3.2 Long Short-Term Memory (LSTM) and GRU",
+      "text": "LSTMs (Hochreiter & Schmidhuber, 1997) alleviate vanishing gradients through an internal cell state C_t and three multiplicative gating mechanisms: 1. Forget gate: f_t = sigma(W_f [h_{t-1}, x_t] + b_f) governs information retention from C_{t-1}. 2. Input gate: i_t = sigma(W_i [h_{t-1}, x_t] + b_i) and candidate cell state C~_t = tanh(W_c [h_{t-1}, x_t] + b_c). 3. Cell state update: C_t = f_t * C_{t-1} + i_t * C~_t (linear additive gradient highway). 4. Output gate: o_t = sigma(W_o [h_{t-1}, x_t] + b_o), yielding hidden state h_t = o_t * tanh(C_t). Gated Recurrent Units (GRU) combine forget and input gates into a single update gate z_t, merging the cell state and hidden state to reduce computational overhead.",
+      "citation": "03 - Recurrent Neural Networks, LSTMs, and Attention | 3.2 Long Short-Term Memory (LSTM) and GRU"
+    },
+    {
+      "chunk_id": "CHUNK_0012",
+      "source_file": "module3_recurrent_networks_attention.txt",
+      "module": "03 - Recurrent Neural Networks, LSTMs, and Attention",
+      "section": "3.3 Additive vs Multiplicative Sequence Attention",
+      "text": "Bahdanau et al. (2015) introduced additive attention where alignment scores e_{ij} = v_a^T tanh(W_a s_{i-1} + U_a h_j) dynamically weigh encoder states h_j. Luong et al. (2015) proposed multiplicative (dot-product) attention: score(s_t, h_i) = s_t^T W_a h_i. Attention eliminates the sequential bottleneck by providing direct O(1) paths between arbitrary sequence positions.",
+      "citation": "03 - Recurrent Neural Networks, LSTMs, and Attention | 3.3 Additive vs Multiplicative Sequence Attention"
+    },
+    {
+      "chunk_id": "CHUNK_0013",
+      "source_file": "module4_transformers_foundations.txt",
+      "module": "04 - Transformers and Self-Attention Foundations",
+      "section": "General Overview",
+      "text": "COURSE: Deep Learning Networks (M.Tech AI-ML) MODULE: 04 - Transformers and Self-Attention Foundations INSTRUCTOR: Department of Artificial Intelligence & Machine Learning",
+      "citation": "04 - Transformers and Self-Attention Foundations | General Overview"
+    },
+    {
+      "chunk_id": "CHUNK_0014",
+      "source_file": "module4_transformers_foundations.txt",
+      "module": "04 - Transformers and Self-Attention Foundations",
+      "section": "4.1 Scaled Dot-Product and Multi-Head Attention",
+      "text": "Vaswani et al. (2017) formalized Scaled Dot-Product Attention: Attention(Q, K, V) = softmax( (Q K^T) / sqrt(d_k) ) V. The scaling factor 1 / sqrt(d_k) counteracts the growth of dot products for large dimensions, which would otherwise push softmax into regions with vanishingly small gradients. Multi-Head Attention projects Q, K, V into h distinct representation subspaces: MultiHead(Q,K,V) = Concat(head_1, ..., head_h) W^O, where head_i = Attention(Q W_i^Q, K W_i^K, V W_i^V).",
+      "citation": "04 - Transformers and Self-Attention Foundations | 4.1 Scaled Dot-Product and Multi-Head Attention"
+    },
+    {
+      "chunk_id": "CHUNK_0015",
+      "source_file": "module4_transformers_foundations.txt",
+      "module": "04 - Transformers and Self-Attention Foundations",
+      "section": "4.2 Positional Encodings: Absolute, Relative, and RoPE",
+      "text": "Because self-attention is permutation-equivariant, positional information must be injected explicitly. Sinusoidal encodings use fixed frequencies: PE_{(pos, 2i)} = sin(pos / 10000^{2i/d}). Rotary Position Embeddings (RoPE, Su et al., 2021) rotate key and query vectors in complex 2D planes: R_{Theta, m}^d x_m, ensuring that the inner product (R_m q)^T (R_n k) depends strictly on relative displacement (m - n), enabling superior length extrapolation in modern LLMs like LLaMA and Mistral.",
+      "citation": "04 - Transformers and Self-Attention Foundations | 4.2 Positional Encodings: Absolute, Relative, and RoPE"
+    },
+    {
+      "chunk_id": "CHUNK_0016",
+      "source_file": "module4_transformers_foundations.txt",
+      "module": "04 - Transformers and Self-Attention Foundations",
+      "section": "4.3 Computational Complexity and Efficient Transformers",
+      "text": "Standard self-attention computes an N x N attention matrix, resulting in O(N^2 * d) time and memory complexity with respect to sequence length N. FlashAttention (Dao et al., 2022) reorganizes the attention computation using GPU SRAM tiling and online softmax scaling, reducing memory IO from O(N^2) HBM accesses to O(N) without altering the exact mathematical result.",
+      "citation": "04 - Transformers and Self-Attention Foundations | 4.3 Computational Complexity and Efficient Transformers"
+    },
+    {
+      "chunk_id": "CHUNK_0017",
+      "source_file": "module5_generative_deep_learning.txt",
+      "module": "05 - Generative Deep Learning: VAEs, GANs, and Diffusion",
+      "section": "General Overview",
+      "text": "COURSE: Deep Learning Networks (M.Tech AI-ML) MODULE: 05 - Generative Deep Learning: VAEs, GANs, and Diffusion INSTRUCTOR: Department of Artificial Intelligence & Machine Learning",
+      "citation": "05 - Generative Deep Learning: VAEs, GANs, and Diffusion | General Overview"
+    },
+    {
+      "chunk_id": "CHUNK_0018",
+      "source_file": "module5_generative_deep_learning.txt",
+      "module": "05 - Generative Deep Learning: VAEs, GANs, and Diffusion",
+      "section": "5.1 Variational Autoencoders (VAEs) and the ELBO",
+      "text": "Variational Autoencoders model data distribution p(x) through continuous latent variables z ~ N(0, I). Because true posterior p(z|x) is intractable, VAEs optimize the Evidence Lower Bound (ELBO): log p(x) >= E_{q_phi(z|x)}[log p_theta(x|z)] - D_KL(q_phi(z|x) || p(z)). The first term is the reconstruction log-likelihood; the second term regularizes variational posterior q_phi(z|x) toward prior p(z). The reparameterization trick z = mu(x) + sigma(x) * epsilon, where epsilon ~ N(0, I), allows backpropagation of gradients with respect to encoder parameters phi.",
+      "citation": "05 - Generative Deep Learning: VAEs, GANs, and Diffusion | 5.1 Variational Autoencoders (VAEs) and the ELBO"
+    },
+    {
+      "chunk_id": "CHUNK_0019",
+      "source_file": "module5_generative_deep_learning.txt",
+      "module": "05 - Generative Deep Learning: VAEs, GANs, and Diffusion",
+      "section": "5.2 Generative Adversarial Networks (GANs) and Minimax Dynamics",
+      "text": "Goodfellow et al. (2014) formulated generative modeling as a zero-sum two-player game: min_G max_D V(D, G) = E_{x~p_data}[log D(x)] + E_{z~p_z}[log(1 - D(G(z)))]. Non-saturating GAN training maximizes E[log D(G(z))] for generator updates. Wasserstein GAN (WGAN, Arjovsky et al., 2017) optimizes the Earth Mover's Distance using the Kantorovich-Rubinstein duality under 1-Lipschitz constraints, enforcing Lipschitz continuity via gradient penalty (WGAN-GP): L = E[D(x~)] - E[D(x)] + lambda * E[(||grad_{x_hat} D(x_hat)||_2 - 1)^2].",
+      "citation": "05 - Generative Deep Learning: VAEs, GANs, and Diffusion | 5.2 Generative Adversarial Networks (GANs) and Minimax Dynamics"
+    },
+    {
+      "chunk_id": "CHUNK_0020",
+      "source_file": "module5_generative_deep_learning.txt",
+      "module": "05 - Generative Deep Learning: VAEs, GANs, and Diffusion",
+      "section": "5.3 Denoising Diffusion Probabilistic Models (DDPM)",
+      "text": "DDPMs (Sohl-Dickstein et al., Ho et al., 2020) define a forward Markov chain that incrementally adds Gaussian noise over T steps: q(x_t | x_{t-1}) = N(x_t; sqrt(1 - beta_t) x_{t-1}, beta_t I). The reverse generative process p_theta(x_{t-1} | x_t) is parameterized by a neural network epsilon_theta(x_t, t) predicting the injected noise via the simplified objective: L_simple = E_{t, x_0, epsilon}[ ||epsilon - epsilon_theta(sqrt(alpha_bar_t) x_0 + sqrt(1 - alpha_bar_t) epsilon, t)||^2 ].",
+      "citation": "05 - Generative Deep Learning: VAEs, GANs, and Diffusion | 5.3 Denoising Diffusion Probabilistic Models (DDPM)"
+    },
+    {
+      "chunk_id": "CHUNK_0021",
+      "source_file": "module6_self_supervised_learning.txt",
+      "module": "06 - Self-Supervised Learning and Foundation Models",
+      "section": "General Overview",
+      "text": "COURSE: Deep Learning Networks (M.Tech AI-ML) MODULE: 06 - Self-Supervised Learning and Foundation Models INSTRUCTOR: Department of Artificial Intelligence & Machine Learning",
+      "citation": "06 - Self-Supervised Learning and Foundation Models | General Overview"
+    },
+    {
+      "chunk_id": "CHUNK_0022",
+      "source_file": "module6_self_supervised_learning.txt",
+      "module": "06 - Self-Supervised Learning and Foundation Models",
+      "section": "6.1 Contrastive Representation Learning (SimCLR, MoCo)",
+      "text": "Self-supervised contrastive learning maps augmented views of the same image (positive pairs) together while pushing different images (negative pairs) apart. The InfoNCE loss optimizes: L_{i,j} = - log ( exp(sim(z_i, z_j) / tau) / sum_{k=1}^{2N} 1_{k!=i} exp(sim(z_i, z_k) / tau) ). SimCLR (Chen et al., 2020) relies on large batch sizes (e.g. 4096) to provide sufficient negative samples, whereas MoCo (He et al., 2020) maintains a dynamic memory queue decoupled from batch size using a momentum encoder theta_k = m * theta_k + (1 - m) * theta_q.",
+      "citation": "06 - Self-Supervised Learning and Foundation Models | 6.1 Contrastive Representation Learning (SimCLR, MoCo)"
+    },
+    {
+      "chunk_id": "CHUNK_0023",
+      "source_file": "module6_self_supervised_learning.txt",
+      "module": "06 - Self-Supervised Learning and Foundation Models",
+      "section": "6.2 Masked Autoencoding in Vision and Language",
+      "text": "BERT (Devlin et al., 2019) pioneered Masked Language Modeling (MLM), masking 15% of input tokens and predicting them using bidirectional Transformer representations. Masked Autoencoders (MAE, He et al., 2022) apply this paradigm to vision: masking a high proportion (75%) of image patches and using an asymmetric encoder-decoder architecture where the deep encoder processes only unmasked patches, learning semantic representations without contrastive negative pairs.",
+      "citation": "06 - Self-Supervised Learning and Foundation Models | 6.2 Masked Autoencoding in Vision and Language"
+    },
+    {
+      "chunk_id": "CHUNK_0024",
+      "source_file": "module7_optimization_regularization.txt",
+      "module": "07 - Regularization, Normalization, and Generalization Dynamics",
+      "section": "General Overview",
+      "text": "COURSE: Deep Learning Networks (M.Tech AI-ML) MODULE: 07 - Regularization, Normalization, and Generalization Dynamics INSTRUCTOR: Department of Artificial Intelligence & Machine Learning",
+      "citation": "07 - Regularization, Normalization, and Generalization Dynamics | General Overview"
+    },
+    {
+      "chunk_id": "CHUNK_0025",
+      "source_file": "module7_optimization_regularization.txt",
+      "module": "07 - Regularization, Normalization, and Generalization Dynamics",
+      "section": "7.1 Batch Normalization vs Layer Normalization",
+      "text": "Batch Normalization (Ioffe & Szegedy, 2015) normalizes activations across the mini-batch dimension: x_hat = (x - mu_B) / sqrt(sigma_B^2 + eps), followed by learnable affine scaling y = gamma * x_hat + beta. While BatchNorm smooths the optimization landscape, it introduces batch-size dependency and fails for recurrent or small-batch regimes. Layer Normalization (Ba et al., 2016) computes statistics across feature channels independently for each sample, making it ideal for variable-length sequences and Transformer architectures. RMSNorm simplifies LayerNorm by enforcing root-mean-square normalization without mean centering, improving training throughput.",
+      "citation": "07 - Regularization, Normalization, and Generalization Dynamics | 7.1 Batch Normalization vs Layer Normalization"
+    },
+    {
+      "chunk_id": "CHUNK_0026",
+      "source_file": "module7_optimization_regularization.txt",
+      "module": "07 - Regularization, Normalization, and Generalization Dynamics",
+      "section": "7.2 Regularization: Weight Decay, Dropout, and Sharpness-Aware Minimization",
+      "text": "L2 regularization penalizes ||W||_2^2 in the loss. In adaptive optimizers (AdamW, Loshchilov & Hutter, 2019), L2 regularization must be decoupled from the gradient updates to prevent adaptive learning rate distortion. Dropout (Srivastava et al., 2014) randomly zeroes out activations with probability p during training, simulating an exponential ensemble of subnetworks. Sharpness-Aware Minimization (SAM, Foret et al., 2021) explicitly seeks flat minima by optimizing: min_w max_{||epsilon|| <= rho} L(w + epsilon), yielding superior generalization under domain shifts.",
+      "citation": "07 - Regularization, Normalization, and Generalization Dynamics | 7.2 Regularization: Weight Decay, Dropout, and Sharpness-Aware Minimization"
+    },
+    {
+      "chunk_id": "CHUNK_0027",
+      "source_file": "module8_robustness_calibration.txt",
+      "module": "08 - Uncertainty Quantification, Calibration, and RAG Grounding",
+      "section": "General Overview",
+      "text": "COURSE: Deep Learning Networks (M.Tech AI-ML) MODULE: 08 - Uncertainty Quantification, Calibration, and RAG Grounding INSTRUCTOR: Department of Artificial Intelligence & Machine Learning",
+      "citation": "08 - Uncertainty Quantification, Calibration, and RAG Grounding | General Overview"
+    },
+    {
+      "chunk_id": "CHUNK_0028",
+      "source_file": "module8_robustness_calibration.txt",
+      "module": "08 - Uncertainty Quantification, Calibration, and RAG Grounding",
+      "section": "8.1 Model Calibration and Expected Calibration Error (ECE)",
+      "text": "Modern deep neural networks are frequently miscalibrated\u2014they output overconfident probabilities that exceed empirical accuracy. Calibration is evaluated using Expected Calibration Error (ECE): ECE = sum_{m=1}^M (|B_m| / N) * |acc(B_m) - conf(B_m)|, where predictions are binned into M confidence intervals. Temperature scaling post-processes logits z via a learned scalar T > 0: p_hat = softmax(z / T). Temperature scaling preserves model accuracy (argmax remains invariant) while minimizing negative log-likelihood on validation data to achieve calibrated probabilities.",
+      "citation": "08 - Uncertainty Quantification, Calibration, and RAG Grounding | 8.1 Model Calibration and Expected Calibration Error (ECE)"
+    },
+    {
+      "chunk_id": "CHUNK_0029",
+      "source_file": "module8_robustness_calibration.txt",
+      "module": "08 - Uncertainty Quantification, Calibration, and RAG Grounding",
+      "section": "8.2 Out-of-Distribution (OOD) Detection and Calibrated Abstention",
+      "text": "When presented with queries outside the training distribution, reliable AI tutors must abstain rather than hallucinating unsupported claims. Maximum Softmax Probability (MSP, Hendrycks & Gimpel, 2017) serves as an initial baseline, but exhibits overconfidence on far-OOD inputs. Energy-based OOD scoring E(x; f) = - T * log sum_i exp(f_i(x) / T) provides mathematically grounded density alignment. Conformal prediction provides distribution-free finite-sample guarantees: finding a calibrated threshold tau such that P(Error <= alpha) >= 1 - delta.",
+      "citation": "08 - Uncertainty Quantification, Calibration, and RAG Grounding | 8.2 Out-of-Distribution (OOD) Detection and Calibrated Abstention"
+    },
+    {
+      "chunk_id": "CHUNK_0030",
+      "source_file": "module8_robustness_calibration.txt",
+      "module": "08 - Uncertainty Quantification, Calibration, and RAG Grounding",
+      "section": "8.3 Retrieval-Augmented Generation (RAG) and Evidence Grounding",
+      "text": "Standard RAG retrieves candidate context passages D = {d_1, ..., d_k} and conditions generation on (q, D). However, naive RAG systems suffer from two critical failure modes: (1) sycophantic hallucination, where the model incorporates retrieved distractor noise or defaults to parametric hallucinations when passages are irrelevant; and (2) citation fabrication, where generated answers cite source passages that do not semantically entail the claim. An evidence-grounded AI tutor requires cross-encoder natural language inference (NLI) to compute an Evidence Agreement Score (EAS) between answer propositions and retrieved context, abstaining whenever max EAS falls below the calibrated conformal threshold tau.",
+      "citation": "08 - Uncertainty Quantification, Calibration, and RAG Grounding | 8.3 Retrieval-Augmented Generation (RAG) and Evidence Grounding"
+    }
+  ]
+}

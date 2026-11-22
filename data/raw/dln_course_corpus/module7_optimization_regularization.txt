@@ -1,0 +1,8 @@
+COURSE: Deep Learning Networks (M.Tech AI-ML)
+MODULE: 07 - Regularization, Normalization, and Generalization Dynamics
+INSTRUCTOR: Department of Artificial Intelligence & Machine Learning
+SECTION: 7.1 Batch Normalization vs Layer Normalization
+Batch Normalization (Ioffe & Szegedy, 2015) normalizes activations across the mini-batch dimension: x_hat = (x - mu_B) / sqrt(sigma_B^2 + eps), followed by learnable affine scaling y = gamma * x_hat + beta. While BatchNorm smooths the optimization landscape, it introduces batch-size dependency and fails for recurrent or small-batch regimes. Layer Normalization (Ba et al., 2016) computes statistics across feature channels independently for each sample, making it ideal for variable-length sequences and Transformer architectures. RMSNorm simplifies LayerNorm by enforcing root-mean-square normalization without mean centering, improving training throughput.
+
+SECTION: 7.2 Regularization: Weight Decay, Dropout, and Sharpness-Aware Minimization
+L2 regularization penalizes ||W||_2^2 in the loss. In adaptive optimizers (AdamW, Loshchilov & Hutter, 2019), L2 regularization must be decoupled from the gradient updates to prevent adaptive learning rate distortion. Dropout (Srivastava et al., 2014) randomly zeroes out activations with probability p during training, simulating an exponential ensemble of subnetworks. Sharpness-Aware Minimization (SAM, Foret et al., 2021) explicitly seeks flat minima by optimizing: min_w max_{||epsilon|| <= rho} L(w + epsilon), yielding superior generalization under domain shifts.

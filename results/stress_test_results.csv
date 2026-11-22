@@ -1,0 +1,5 @@
+Stress Regime,Sample Count,Dense RAG Abstention Acc,Dense RAG Hallucination Rate,LearnMate Abstention Acc,LearnMate Hallucination Rate,LearnMate Agreement Score
+Regime 1: In-Syllabus Grounded (Control),14,1.0,0.0,0.6429,0.0,0.5437
+Regime 2: Missing Syllabus Concepts (In-Domain Unanswerable),5,0.8,0.2,1.0,0.0,0.1478
+Regime 3: Out-of-Domain Disciplinary Shift,4,1.0,0.0,1.0,0.0,0.0
+Regime 4: Near-Miss Distractor Contexts,2,1.0,0.0,1.0,0.0,0.2797

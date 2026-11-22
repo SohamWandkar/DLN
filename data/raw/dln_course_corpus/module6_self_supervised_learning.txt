@@ -1,0 +1,8 @@
+COURSE: Deep Learning Networks (M.Tech AI-ML)
+MODULE: 06 - Self-Supervised Learning and Foundation Models
+INSTRUCTOR: Department of Artificial Intelligence & Machine Learning
+SECTION: 6.1 Contrastive Representation Learning (SimCLR, MoCo)
+Self-supervised contrastive learning maps augmented views of the same image (positive pairs) together while pushing different images (negative pairs) apart. The InfoNCE loss optimizes: L_{i,j} = - log ( exp(sim(z_i, z_j) / tau) / sum_{k=1}^{2N} 1_{k!=i} exp(sim(z_i, z_k) / tau) ). SimCLR (Chen et al., 2020) relies on large batch sizes (e.g. 4096) to provide sufficient negative samples, whereas MoCo (He et al., 2020) maintains a dynamic memory queue decoupled from batch size using a momentum encoder theta_k = m * theta_k + (1 - m) * theta_q.
+
+SECTION: 6.2 Masked Autoencoding in Vision and Language
+BERT (Devlin et al., 2019) pioneered Masked Language Modeling (MLM), masking 15% of input tokens and predicting them using bidirectional Transformer representations. Masked Autoencoders (MAE, He et al., 2022) apply this paradigm to vision: masking a high proportion (75%) of image patches and using an asymmetric encoder-decoder architecture where the deep encoder processes only unmasked patches, learning semantic representations without contrastive negative pairs.
